@@ -1,0 +1,339 @@
+.navbar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4rem;
+  background-color: #21292c;
+  overflow: hidden;
+  z-index: 10;
+  .left{
+		float: left;
+		width: 20%;
+		color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    // text-align: center;
+    i{
+	    padding-left: 1rem;
+    }
+  }
+  .middle{
+		float: left;
+		width: 60%;
+		color: #fff;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .right{
+		float: left;
+		width: 20%;
+		color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: right;
+    .name{
+    	padding-right: 1rem;
+    }
+    i{
+      padding-right: 1rem;
+    }
+  }
+}
+.box{
+  position: fixed;
+  top:4rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  background: #f2f2f2;
+  .base{
+    margin:2rem 0.5rem 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    .nameBox{
+      padding: 1rem;
+      border-radius: 4px 4px 0 0;
+      .name{
+        font-size: 2rem;
+        padding-bottom: 1rem;
+      }
+      .child{
+        font-size: 1.6rem;
+        color: #717171;
+        padding-bottom: 0.5rem;
+      }
+    }
+    .status{
+      border-top: 1px dashed #ddd;
+      line-height: 5rem;
+      text-align: center;
+      border-radius: 0 0 4px 4px;
+      div{
+        font-size: 2rem;
+        border-radius: 0 0 4px 4px;
+      }
+      .status1{//未开始，准备中
+        background: #4CAF50;
+        color: #fff;
+      }
+      .status2{ //作业中，长期作业中
+        background: #787ad0;
+        color: #fff;
+      }
+      .status3{ //待批改
+        background: #ffb220;
+        color: #fff;
+      }
+      .status4{ //已完成，客观题自动批改已撤销
+        background: #eaeaea;
+        color: #8c8c8c;
+      }
+    }
+  }
+  .result{
+    margin:2rem 0.5rem 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    .title{
+      padding: 1rem;
+      border-bottom: 1px dashed #ddd;
+      .one{
+        text-align: center;
+        font-size: 2rem;
+        color: #536773;
+      }
+      .timeInfo{
+        text-align: center;
+        padding-top: 0.5rem;
+        font-size: 1.6rem;
+        color: #a0a0a0;
+      }
+    }
+    .countBox{
+      ul{
+        overflow:hidden;
+        padding: 1rem 0;
+        li{
+          float: left;
+          width: 50%;
+          text-align: center;
+          padding-top: 1rem;
+          .line{
+            padding: 0 0 1rem;
+            .up{
+              font-size: 1.6rem;
+            }
+            .down{
+              font-size: 2rem;
+              padding-top: 1rem;
+              color: #4CAF50;
+            }
+          }
+        }
+      }
+    }
+  }
+  .time{
+    margin:2rem 0.5rem 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    .countBox{
+      ul{
+        overflow:hidden;
+        padding: 1rem 0;
+        li{
+          float: left;
+          width: 50%;
+          text-align: center;
+          padding-top: 1rem;
+          .line{
+            padding: 0 0 1rem;
+            .up{
+              font-size: 1.6rem;
+            }
+            .down{
+              font-size: 2rem;
+              padding-top: 1rem;
+              color: #4CAF50;
+            }
+          }
+        }
+      }
+    }
+  }
+  .count{
+    margin:2rem 0.5rem 0;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    padding: 1rem 0;
+    .statistics{
+      line-height: 3rem;
+      text-align: center;
+      font-size: 2rem;
+      color: #c5a473;
+      .btn{
+
+      }
+    }
+    .table{
+      margin: 1rem 0;
+      border-bottom: 1px dashed #ddd;
+      border-top: 1px dashed #ddd;
+      padding: 1rem 0;
+      .list{
+        padding: 0 1rem;
+        ul{
+          li{
+            padding-bottom:1rem; 
+            p{
+              font-size: 1.6rem;
+              overflow: hidden;
+              color: #584c4c;
+              .number{
+                float: right;
+              }
+            }
+            .resultP{
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+  .message{
+    margin:2rem 0.5rem 0;
+    background: #4CAF50;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    .sendBtn{
+      line-height: 5rem;
+      text-align: center;
+      font-size: 2rem;
+      color: #fff;
+      .sendName{
+
+      }
+    }
+  }
+  .ranking{
+    margin:2rem 0.5rem 4rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px #ccc;
+    -moz-box-shadow: #ccc 0 1px 6px;
+    -webkit-box-shadow: #ccc 0 1px 6px;
+    .rankTile{
+      overflow: hidden;
+      border-bottom: 1px dashed #ddd;
+      .rankName{
+        float: left;
+        padding: 1rem 0 1rem 1rem;
+        line-height: 3rem;
+        font-size: 2rem;
+        color: #536773;
+      }
+      .rankType{
+        float: right;
+        overflow: hidden;
+        line-height: 3rem;
+        padding: 1rem 1rem 1rem 0;
+        font-size: 2.5rem;
+        .rankOne{
+          float: left;
+          padding-right: 2rem;
+        }
+        .rankTwo{
+          float: right;
+        }
+        .selected{
+          color: #4CAF50;
+        }
+      }
+    }
+    .list{
+      padding-bottom: 1rem;
+      ul{
+        li{
+          border-bottom: 1px dashed #ddd;
+          .student{
+            overflow: hidden;
+            padding: 1rem;
+            .order{
+              float: left;
+              line-height: 4rem;
+              padding-right: 1rem;
+              font-size: 1.6rem;
+              min-width: 3rem;
+            }
+            .headimg{
+              float: left;
+              width: 4rem;
+              height: 4rem;
+              img{
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                padding-top: 0.5rem;
+              }
+            }
+            .nameBox{
+              float: left;
+              .sign{
+                height: 2rem;
+                font-size: 1.6rem;
+              }
+              .mark{
+                font-size: 1.4rem;
+                color: #8e8888;
+              }
+            }
+            .correct{
+              float: right;
+              line-height: 4rem;
+              font-size: 1.6rem;
+              color: #4CAF50;
+
+            }
+          }
+          .noAnswer{
+            background: #f7f7f7;
+          }
+        }
+      }
+      .tips{
+        line-height: 5rem;
+        text-align: center;
+        font-size: 1.6rem;
+        color: #4CAF50;
+        .loadMore{
+
+        }
+        .noneMore{
+
+        }
+        .none{
+
+        }
+      }
+    }
+  }
+}

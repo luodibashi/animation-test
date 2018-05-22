@@ -1,0 +1,125 @@
+.box{
+  position: fixed;
+  top: 8.4rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background: #f2f2f2;
+  .child{
+    padding: 1rem .5rem;
+    .info{
+      box-shadow: 0 1px 6px #ccc;
+      -moz-box-shadow: #ccc 0 1px 6px;
+      -webkit-box-shadow: #ccc 0 1px 6px;
+      border-radius: 4px;
+      .header{
+        border-bottom: 1px dashed #ddd;
+        overflow: hidden;
+        padding: 1rem 0;
+        background: #fff;
+        border-radius: 4px 4px 0 0;
+        .order{
+          float: left;
+          /* width: 40%; */
+          border-left: 5px solid #404459;
+          padding-left: 1rem;
+          /* padding: 0.5rem 0 0.5rem 1rem; */
+          .orderName{
+            font-size: 1.4rem;
+            line-height: 2rem;
+          }
+          .orderNumber{
+            font-size: 2rem;
+            font-weight: 600;
+            color: #404459;
+            line-height: 2rem;
+          }
+        }
+        .nature{
+          float: right;
+          width: 50%;
+          text-align: right;
+          padding-right: 1rem;
+          .natureNumber{
+            font-size: 1.4rem;
+            line-height: 2rem;
+          }
+          .natureInfo{
+            font-size: 1.4rem;
+            line-height: 2rem;
+          }
+        }
+      }
+      .name{
+        width: 100%;
+        height: 8rem;
+        display: table;
+        font-size: 2.5rem;
+        font-weight: 500;
+        background: #f7f5f7;
+        color: #000;
+        .nMiddle{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          width: 100%;
+          .nBottom{
+            color: #404459;
+            padding: 0 10px;
+          }
+        }
+      }
+      .qrcode-zone{
+        text-align: center;
+        background: #f7f5f7;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed #ddd;
+        p{
+          font-size: 1.6rem;
+          color: #3f425f;
+        }
+      }
+      .remark{
+        background: #f7f5f7;
+        overflow: hidden;
+        padding: 1rem 1rem 2rem;
+        border-radius: 0 0 4px 4px;
+        .photo{
+          float: left;
+          width: 30%;
+          overflow: hidden;
+          img{
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            float: right;
+            margin: 0 1rem 0 0;
+          }
+        }
+        .remarkInfo{
+          float: right;
+          width: 70%;
+          .infoBox{
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 1.6rem;
+            min-height: 5rem;
+          }
+        }
+      }
+    }
+    .update{
+      padding-top: 2rem;
+      div{
+        line-height: 5rem;
+        text-align: center;
+        background: #009245;
+        border-radius: 4px;
+        font-size: 1.6rem;
+        color: #fff;
+      }
+    }
+  }
+}

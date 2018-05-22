@@ -1,0 +1,299 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">个人中心</div>
+	</div>
+<!-- 	<div class="right">
+		<div class="name">right</div>
+	</div> -->
+</div>
+<div class="box">
+	<ul>
+		<li>
+			<div class="child max" (click)="changePhoto()">
+				<div class="title">头像</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+					<img src="{{teacherInfo.photo?teacherInfo.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child" (click)="editName()">
+				<div class="title">名字</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+					<div class="info">{{teacherInfo.teacherName}}</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child" (click)="editAccount()">
+				<div class="title">用户名</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+					<div class="info">{{teacherInfo.account?teacherInfo.account:'无'}}</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child" (click)="editEmail()">
+				<div class="title">邮箱</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+					<div class="info">{{teacherInfo.email?teacherInfo.email:'无'}}</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child" (click)="editPhone()">
+				<div class="title">手机号</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+					<div class="info">{{teacherInfo.phone?teacherInfo.phone:'无'}}</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child step" (click)="editPassword()">
+				<div class="title">修改密码</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child">
+				<div class="title">当前机构</div>
+				<div class="content">
+					<div class="info school">{{teacherInfo.schoolName}}</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child step" (click)="editTag()">
+				<div class="title">教学阶段及科目</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="child step" (click)="editWechat()">
+				<div class="title">微信绑定</div>
+				<div class="content">
+					<div class="icon">
+						<i class="fa fa-angle-right"></i>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class="quit">
+	<div (click)="quit()">退出</div>
+</div>
+
+<!-- 切换信息 -->
+<div class="change">
+	<!-- 修改名字 -->
+	<div class="base" *ngIf="editType===1">
+		<p class="title">
+			修改名字
+			<span *ngIf="messageErr">{{messageErr}}</span>
+		</p>
+		<div class="input">
+			<form>
+				<input type="text" name="teacherName" [(ngModel)]="teacherName">
+			</form>
+		</div>
+		<div class="doBox">
+			<div class="sure" (click)="updateName()">修改</div>
+			<div class="cancel" (click)="cancelUpdate()">取消</div>
+		</div>
+	</div>
+	<!-- 修改用户名 -->
+	<div class="base" *ngIf="editType===2">
+		<p class="title">
+			修改用户名
+			<span *ngIf="messageErr">{{messageErr}}</span>
+		</p>
+		<div class="outer" *ngIf="showValidate">
+			<div class="input">
+				<form>
+					<input type="password" name="password" [(ngModel)]="password" placeholder="请输入账号密码">
+				</form>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="validatePassword()">验证密码</div>
+				<div class="cancel" (click)="cancelValidate()">取消</div>
+			</div>
+		</div>
+		<div class="outer" *ngIf="!showValidate">
+			<div class="input">
+				<form>
+					<input type="text" name="account" [(ngModel)]="account">
+				</form>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="updateAccount()">修改</div>
+				<div class="cancel" (click)="cancelUpdate()">取消</div>
+			</div>
+		</div>
+	</div>
+	<!-- 修改邮箱 -->
+	<div class="base" *ngIf="editType===3">
+		<p class="title">
+			修改邮箱
+			<span *ngIf="messageErr">{{messageErr}}</span>
+		</p>
+		<div class="outer" *ngIf="showValidate">
+			<div class="input">
+				<form>
+					<input type="password" name="password" [(ngModel)]="password" placeholder="请输入账号密码">
+				</form>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="validatePassword()">验证密码</div>
+				<div class="cancel" (click)="cancelValidate()">取消</div>
+			</div>
+		</div>
+		<div class="outer" *ngIf="!showValidate">
+			<div class="input">
+				<form>
+					<input type="text" name="email" [(ngModel)]="email" placeholder="请输入新邮箱地址" (blur)="validateEmailForm()">
+				</form>
+			</div>
+			<div class="code">
+				<form>
+					<input type="text" name="captcha" [(ngModel)]="captcha" placeholder="请输入验证码">
+				</form>
+				<!-- <img src="{{codeImg}}"> -->
+				<div class="getCaptcha">
+					<div *ngIf="!forbidGet" (click)="getEmailCaptcha()">
+						<div *ngIf="!sendWait">获取验证码</div>
+						<div *ngIf="sendWait">发送中</div>
+					</div>
+					<div *ngIf="forbidGet">{{second/1000}}s后重新获取</div>
+				</div>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="updateEmail()">修改</div>
+				<div class="cancel" (click)="cancelUpdate()">取消</div>
+			</div>
+		</div>
+	</div>
+	<!-- 修改手机 -->
+	<div class="base" *ngIf="editType===4">
+		<p class="title">
+			修改手机
+			<span *ngIf="messageErr">{{messageErr}}</span>
+		</p>
+		<div class="outer" *ngIf="showValidate">
+			<div class="input">
+				<form>
+					<input type="password" name="password" [(ngModel)]="password" placeholder="请输入账号密码">
+				</form>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="validatePassword()">验证密码</div>
+				<div class="cancel" (click)="cancelValidate()">取消</div>
+			</div>
+		</div>
+		<div class="outer" *ngIf="!showValidate">
+			<div class="input">
+				<form>
+					<input type="text" name="phone" [(ngModel)]="phone" placeholder="请输入新手机号码" (blur)="validatePhoneForm()">
+				</form>
+			</div>
+			<div class="code">
+				<form>
+					<input type="text" name="captcha" [(ngModel)]="captcha" placeholder="请输入图片验证码">
+				</form>
+				<img (click)="updateCaptcha()" src="{{base64Img}}">
+			</div>
+			<div class="code">
+				<form>
+					<input type="text" name="phoneCaptcha" [(ngModel)]="phoneCaptcha" placeholder="请输入手机验证码">
+				</form>
+				<div class="getCaptcha">
+					<div *ngIf="!forbidGet" (click)="getPhoneCaptcha()">
+						<div *ngIf="!sendWait">获取验证码</div>
+						<div *ngIf="sendWait">发送中</div>
+					</div>
+					<div *ngIf="forbidGet">{{second/1000}}s后重新获取</div>
+				</div>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="updatePhone()">修改</div>
+				<div class="cancel" (click)="cancelUpdate()">取消</div>
+			</div>
+		</div>
+	</div>
+	<!-- 修改密码 -->
+	<div class="base" *ngIf="editType===5">
+		<p class="title">
+			修改密码
+			<span *ngIf="messageErr">{{messageErr}}</span>
+		</p>
+		<div class="outer">
+			<div class="input">
+				<form>
+					<input type="password" name="oldPassword" [(ngModel)]="oldPassword" placeholder="请输入旧密码" (blur)="validatePasswordForm(1)">
+				</form>
+			</div>
+			<div class="input">
+				<form>
+					<input type="password" name="newPassword" [(ngModel)]="newPassword" placeholder="请输入新密码" (blur)="validatePasswordForm(2)">
+				</form>
+			</div>
+			<div class="input">
+				<form>
+					<input type="password" name="repeatPassword" [(ngModel)]="repeatPassword" placeholder="请重新输入新密码" (blur)="validatePasswordForm(3)">
+				</form>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="updatePassword()">修改</div>
+				<div class="cancel" (click)="cancelUpdate()">取消</div>
+			</div>
+		</div>
+	</div>
+	<!-- 退出 -->
+	<div class="base" *ngIf="editType===6">
+		<p class="title">
+			退出
+		</p>
+		<div class="outer">
+			<div class="document">
+				<p>确认退出系统么？</p>
+			</div>
+			<div class="doBox">
+				<div class="sure" (click)="imSure()">退出</div>
+				<div class="cancel" (click)="noThanks()">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="background" *ngIf="editType===1||editType===2||editType===3||editType===4||editType===5||editType===6"></div>
+
+<!-- 图片上传控件 -->
+<form id="fd" enctype="multipart/form-data">
+	<input type="file" name="resource" id="avator" accept="image/*">
+</form>

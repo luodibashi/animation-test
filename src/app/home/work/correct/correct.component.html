@@ -1,0 +1,402 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">作业批改</div>
+	</div>
+<!-- 	<div class="right" (click)="changeType()">
+		<div class="name">right</div>
+		<i class="fa fa-plus"></i>
+	</div> -->
+</div>
+<div class="box">
+	<div class="header">
+		<div class="workInfo">
+			<p class="name" (click)="getMoreWorkInfo()">{{workInfo?.workName}}</p>
+			<div class="info" (click)="getMoreWorkInfo()">
+				<div class="submit"><b>交作业人数：</b>{{workInfo?.submitNumber?workInfo?.submitNumber:'0'}}人</div>
+				<div class="status"><b>作业状态：</b>{{workStatus[workInfo?.workStatus]}}</div>
+				<div class="more">
+					<i class="fa fa-chevron-down" *ngIf="!showMoreWorkInfo"></i>
+					<i class="fa fa-chevron-up" *ngIf="showMoreWorkInfo"></i>
+				</div>
+			</div>
+			<div class="extend" *ngIf="showMoreWorkInfo">
+				<p class="one"><b>布置人数：</b>{{workInfo?.allNumber?workInfo?.allNumber:'0'}}人</p>
+				<p class="one"><b>取作业人数：</b>{{workInfo?.getNumber?workInfo?.getNumber:'0'}}人</p>
+				<p class="one"><b>作业起止时间：</b>{{workInfo?.startTime | date:"y/MM/dd hh:mm"}}-<span *ngIf="!workInfo?.endTime">不限时</span><span *ngIf="workInfo?.endTime">{{workInfo?.endTime | date:"y/MM/dd hh:mm"}}</span></p>
+				<p class="one"><b>规定时长：</b>{{workInfo?.durationTime | DurationTime}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="questionBox">
+		<div class="material" *ngIf="mid">
+			<p class="title">{{mOrder}}.(复合题材料)</p>
+      <div [innerHTML]="mContent | safeHtml"></div>
+      <ul *ngIf="sourceData.length>0">
+      	<li *ngFor="let source of sourceData;let i=index;">
+		      <div class="mp3" *ngIf="source.type===2">
+		        <audio controls="controls" style="margin: 10px auto;display: block;">
+		          <source [src]='source.url' type="audio/mpeg" /> Your browser does not support the audio element.
+		        </audio>
+		      </div>
+		      <div class="vedio" *ngIf="source.type===1">
+		        <iframe style="margin: 10px auto;display: block;min-width: 300px; width: 100%;" [ngStyle]="{'height':isMobile?'210px':'390px'}" [src]='source.url' frameborder="0"></iframe>
+		      </div>
+      	</li>
+      </ul>
+		</div>
+		<div class="quesiton">
+			<p class="title"><span *ngIf="mid">{{mOrder}}-</span>{{qOrder}}.({{['','客观题','主观题'][qType]}} {{qScore}}分)</p>
+			<div class="stem" [innerHTML]="qContent"></div>
+			<div class="obj" *ngIf="qType===1">
+				<div class="objBox">
+					<ul>
+						<li *ngFor="let choice of choices; let i=index;">
+							<div class="objChild" [ngClass]="{'selected':qAnswer.indexOf(i)!=-1}">
+								<div class="right" *ngIf="qAnswer.indexOf(i)!=-1">
+									<div class="banana">
+										<div class="green">
+											
+										</div>
+										<i class="fa fa-check"></i>
+									</div>
+								</div>
+								<div class="wrong" *ngIf="qAnswer.indexOf(i)==-1">
+									<span class="number">{{option[i]}}</span>
+								</div>
+								<div class="option" [innerHTML]="choice"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="sub" *ngIf="qType===2">
+				<div class="subBox">
+					<ul>
+						<li *ngFor="let choice of choices[0];let i=index;">
+							<div class="childBox">
+								<div class="order">{{i+1}}.(本题{{choices[1][i]}}分)</div>
+								<div class="answerWay">请使用{{answerType[choice]}}方式作答</div>
+								<!-- <div class="score">总分:{{choices[1][i]}}分</div> -->
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="answerBox">
+		<div class="user">
+			<div class="info">
+				<div class="img">
+					<img src="{{photo?photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+				</div>
+				<div class="userName">
+					<p class="name">{{studentName}}</p>
+					<p class="score" *ngIf="isSubmit===1&&getStatus===1">本题得分:{{score?score:'0'}}分</p>
+					<p class="score" *ngIf="!isSubmit&&getStatus===1">未交卷</p>
+					<p class="score" *ngIf="getStatus===2">未取卷</p>
+				</div>
+				<div class="showBtn" (click)="chooseStudent()">
+					<i class="fa fa-bars"></i>
+					<!-- <i class="fa fa-chevron-up"></i> -->
+				</div>
+			</div>
+		</div>
+		<div class="answer">
+			<div class="tips" *ngIf="getStatus===1&&!isSubmit">
+				<p>该学生还未交作业</p>
+			</div>
+			<div class="tips" *ngIf="getStatus===2">
+				<p>该学生还未取作业</p>
+			</div>
+			<div *ngIf="getStatus===1&&isSubmit===1">
+				<div class="tips" *ngIf="!isAnswer&&qType===1">
+					<p>该题未作答</p>
+				</div>
+				<div class="userAnswer" *ngIf="isAnswer||qType===2">
+					<div class="objType" *ngIf="qType===1">
+						学生的选择是
+						<span class="userChoice" [ngClass]="{'answerRight':studentQuestionAnswer?.isRight===1,'answerWrong':!studentQuestionAnswer?.isRight}">
+							<b *ngFor="let uAnswer of answer;let i=index;">{{option[uAnswer]}}</b>
+						</span>
+						，回答
+						<span class="result" *ngIf="!studentQuestionAnswer?.isRight">
+							<b class="answerWrong">错误</b>
+						</span>
+						<span class="result" *ngIf="studentQuestionAnswer?.isRight===1">
+							<b class="answerRight">正确</b>
+						</span>
+					</div>
+					<div class="subType" *ngIf="qType===2">
+						<div class="subAnswerBox">
+							<ul>
+								<li *ngFor="let order of choices[0];let i=index;">
+									<div class="correctBox">
+										<div class="orderNumber">
+											<p class="childOrder">{{i+1}}.(共{{choices[1][i]}}分)</p>
+											<div (click)="showCorrectBox(i,order)">
+												<p class="correctBtn" *ngIf="studentQuestionAnswer?.correctType">得分:{{correct[i]?.score?correct[i]?.score:'0'}}分</p>
+												<p class="correctBtn" *ngIf="!studentQuestionAnswer?.correctType">待批改</p>
+											</div>
+										</div>
+										<div class="studentAnswer">
+											<div class="textarea" *ngIf="order===1">
+												<!-- 文本 -->
+												<div class="noneAnswer" *ngIf="(answer.length>0&&!answer[i])||(answer.length<1)">
+													学生未作答
+												</div>
+												<div class="reply" *ngIf="answer.length>0&&answer[i]">
+													{{answer[i]}}
+												</div>
+											</div>
+											<div class="text" *ngIf="order===2">
+												<!-- 填空 -->
+												<div class="noneAnswer" *ngIf="(answer.length>0&&!answer[i])||(answer.length<1)">
+													学生未作答
+												</div>
+												<div class="reply" *ngIf="answer.length>0&&answer[i]">
+													{{answer[i]}}
+												</div>
+											</div>
+											<div class="picture" *ngIf="order===3">
+												<!-- 图片 -->
+												<div class="noneAnswer" *ngIf="(answer.length>0&&!answer[i])||(answer.length<1)">
+													<i class="fa fa-file-image-o"></i>
+												</div>
+												<div class="reply" *ngIf="answer.length>0&&answer[i]" (click)="watchImg(answer[i])">
+													<img src="{{answer[i]}}">
+												</div>
+											</div>
+											<div class="audio" *ngIf="order===4" [ngClass]="{'haved':answer.length>0&&answer[i]}">
+												<!-- 音频 -->
+												<div class="noneAnswer" *ngIf="(answer.length>0&&!answer[i])||(answer.length<1)">
+													<i class="fa fa-play"></i>
+												</div>
+												<div class="reply" *ngIf="answer.length>0&&answer[i]" (click)="listen(answer[i])">
+													<i class="fa fa-play" *ngIf="audio.src!=answer[i]||(audio.paused&&audio.src===answer[i])||audio.ended"></i>
+													<i class="fa fa-pause" *ngIf="!audio.paused&&audio.src===answer[i]"></i>
+												</div>
+											</div>
+										</div>
+										<div class="correctContent">
+											<div class="correctTool" *ngIf="showCorrectToolOrder===(qid+''+i+''+order)">
+												<div class="correctPoint">
+													<span class="correctPointTitle">请拖动滑块进行评分</span>
+													<form>
+														<div *ngIf="correct&&correct[i]&&correct[i]score">
+															<input type="range" name="givePoints" max="{{choices[1][i]}}" min="0" step="{{choices[1][i]>1||choices[1][i]==0?'1':'0.1'}}"  [(ngModel)]="correct[i].score" (change)="correctChild(0,i)">
+														</div>
+													</form>
+												</div>
+												<div class="correctTypeChoose">
+													<span class="correctTypeChooseTitle">批改内容</span>
+													<div class="typeBox">
+														<div class="typeChild" [ngClass]="{'haved':(correct[i]?.correct?.text&&correct[i]?.correct?.text.length>1)||targetChild===(qid+''+i+''+1)}">
+															<div class="middleTypeChild" (click)="addCorrectType(1,i)">
+																<i class="fa fa-file-text-o"></i>
+																<p>填空</p>
+															</div>
+														</div>
+														<!-- <div class="typeChild" [ngClass]="{'haved':correct[i]?.correct?.textarea}">
+															<div class="middleTypeChild" (click)="addCorrectType(2,i)">
+																<i class="fa fa-file-text-o"></i>
+																<p>文本</p>
+															</div>
+														</div> -->
+														<div class="typeChild" [ngClass]="{'haved':(correct[i]?.correct?.picture&&correct[i]?.correct?.picture.length>1)||targetChild===(qid+''+i+''+3)}">
+															<div class="middleTypeChild" (click)="addCorrectType(3,i)">
+																<i class="fa fa-file-image-o"></i>
+																<p>图片</p>
+															</div>
+														</div>
+														<div class="typeChild" [ngClass]="{'haved':(correct[i]?.correct?.audio&&correct[i]?.correct?.audio.length>1)||targetChild===(qid+''+i+''+4)}">
+															<div class="middleTypeChild" (click)="addCorrectType(4,i)">
+																<i class="fa fa-microphone"></i>
+																<p>音频</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="correctTeacher">
+												<div class="teacherInfo">
+													<div class="teacherImg">
+														<img src="{{teacherInfo?.photo?teacherInfo?.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+													</div>
+													<p>{{teacherShortName}}</p>
+												</div>
+												<div class="correctFile" *ngIf="!correct[i]?.correct?.audio&&!correct[i]?.correct?.picture&&!correct[i]?.correct?.text&&!correct[i]?.correct?.textarea">
+													<div class="noneCorrect">您还未点评</div>
+												</div>
+												<div class="correctFile">
+													<!-- 音频 -->
+													<!-- <p>{{correct[i]?.correct?.audio}}</p> -->
+													<div class="audio" *ngIf="(correct[i]?.correct?.audio&&correct[i]?.correct?.audio.length>1)||(targetChild===(qid+''+i+''+4)&&correct[i]?.correct?.audio.length===1)">
+														<div class="answer" *ngIf="correct[i]?.correct?.audio.length>1">
+															<div (click)="listen(correct[i]?.correct?.audio)">
+																<!-- <i class="fa fa-play"></i> -->
+																<i class="fa fa-play" *ngIf="audio.src!=correct[i]?.correct?.audio||(audio.paused&&audio.src===correct[i]?.correct?.audio)||audio.ended"></i>
+																<i class="fa fa-pause" *ngIf="!audio.paused&&audio.src===correct[i]?.correct?.audio"></i>
+															</div>
+														</div>
+														<div class="reply" *ngIf="targetChild===(qid+''+i+''+4)&&correct[i]?.correct?.audio.length===1">
+															<div (click)="tapeAudio(i)" class="replyTips">
+																<i class="fa fa-microphone"></i>
+																<p class="ing" *ngIf="targetQuestion===i&&recording">{{endIndex}}s</p>
+															</div>
+														</div>
+														<i class="fa fa-plus-circle" *ngIf="!recording" (click)="deleteCorrect(4,i)"></i>
+													</div>
+													<!-- 图片 -->
+													<div class="picture" *ngIf="(correct[i]?.correct?.picture&&correct[i]?.correct?.picture.length>1)||targetChild===(qid+''+i+''+3)">
+														<div class="answer" *ngIf="correct[i]?.correct?.picture.length>1">
+															<div class="answerMiddle" (click)="watchImg(correct[i]?.correct?.picture)">
+																<img src="{{correct[i]?.correct?.picture}}">
+															</div>
+														</div>
+														<div class="reply" *ngIf="targetChild===(qid+''+i+''+3)">
+															<div (click)=uploadImg(i)>
+																<i class="fa fa-file-image-o"></i>
+															</div>
+														</div>
+														<i class="fa fa-plus-circle" (click)="deleteCorrect(3,i)"></i>
+													</div>
+													<!-- <div class="textarea" *ngIf="correct[i]?.correct?.textarea">
+														<div class="reply">
+															<form>
+																<input type="text" name="correntText" [(ngModel)]="correct[i].correct.textarea" (blur)="correctChild(2,i)">
+															</form>
+														</div>
+														<i class="fa fa-plus-circle" (click)="deleteCorrect(2,i)"></i>
+													</div> -->
+													<!-- 文本 -->
+													<div class="text" *ngIf="(correct[i]?.correct?.text&&correct[i]?.correct?.text.length>1)||targetChild===(qid+''+i+''+1)">
+														<!-- <div class="answer">
+															
+														</div> -->
+														<div class="reply">
+															<form>
+																<input type="text" name="correntText" [(ngModel)]="correct[i].correct.text" (blur)="correctChild(1,i)">
+															</form>
+														</div>
+														<i class="fa fa-plus-circle" (click)="deleteCorrect(1,i)"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="questionOrder">
+	<div class="menu">
+		<div class="pre" *ngIf="nowOrder!=1" (click)="preQuestion()">上一题</div>
+		<div class="title" (click)="showQuestion()">
+			<div class="gide">
+				<i class="fa fa-arrow-circle-up" *ngIf="!showQuestionBox"></i>
+				<i class="fa fa-arrow-circle-down" *ngIf="showQuestionBox"></i>
+			</div>
+			{{nowOrder}}/{{totalNumber}}
+		</div>
+		<div class="next" *ngIf="nowOrder!=totalNumber" (click)="nextQuestion()">下一题</div>
+	</div>
+	<div class="insign">
+		<div class="order" *ngIf="showQuestionBox">
+			<ul *ngFor="let number of orderList; let i=index;">
+				<li *ngIf="number.qid">
+					<div class="number" [ngClass]="{'selected':qid===number.qid}" (click)="chooseQuestion(0,number.qid,i)">
+						<div class="preface">{{i+1}}</div>
+					</div>
+				</li>
+				<ul *ngIf="number.mid">
+					<li *ngFor="let child of number.child; let m=index;">
+						<div class="number" [ngClass]="{'selected':qid===child.qid}" (click)="chooseQuestion(number.mid,child.qid,i,m)">
+							<div class="preface">{{i+1}}</div>
+							<div class="child">{{m+1}}</div>
+						</div>
+					</li>
+				</ul>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="student" *ngIf="showStudentBox">
+	<div class="title">
+		<div class="head">
+			<div class="icon" (click)="chooseStudent()">
+				<i class="fa fa-close"></i>
+				<!-- <i class="fa fa-chevron-left"></i> -->
+			</div>
+			<p>请选择学生</p>
+		</div>
+	</div>
+	<div class="newBox">
+		<ul *ngIf="studentList.length>0||studentList2.length>0">
+			<!-- 已取卷 -->
+			<li *ngFor="let geter of studentList; let i=index;">
+				<div class="sideBox" (click)="selectStudent(geter.studentId,geter.studentName,geter.photo,geter.isSubmit,geter.score,1,geter.isAnswer,geter.isCheck)">
+					<div class="headimg">
+						<img src="{{geter.photo?geter.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+					</div>
+					<div class="userInfo">
+						<p class="name">{{geter.studentName}}</p>
+						<p class="score" *ngIf="geter.isSubmit===1">得分:{{geter.score?geter.score:'0'}}分</p>
+						<p class="score" *ngIf="!geter.isSubmit">未交卷</p>
+					</div>
+					<div class="checkBox" *ngIf="studentId === geter.studentId">
+						<i class="fa fa-check-circle"></i>
+					</div>
+				</div>
+			</li>
+			<!-- 未取卷 -->
+			<li *ngFor="let noGeter of studentList2; let m=index;">
+				<div [ngStyle]="{'background':'#fbfbfb'}">
+					<div class="sideBox" (click)="selectStudent(noGeter.studentId,noGeter.studentName,noGeter.photo,noGeter.isSubmit,noGeter.score,2,noGeter.isAnswer,noGeter.isCheck)">
+						<div class="headimg">
+							<img src="{{noGeter.photo?noGeter.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+						</div>
+						<div class="userInfo">
+							<p class="name">{{noGeter.studentName}}</p>
+							<p class="score">未取卷</p>
+						</div>
+						<div class="checkBox" *ngIf="studentId === noGeter.studentId">
+							<i class="fa fa-check-circle"></i>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="background" *ngIf="showStudentBox" (click)="chooseStudent()"></div>
+<form id="fd" enctype="multipart/form-data" style="display: block;">
+  <input type="file" id='picture' name="resource" accept="image/*" />
+</form>
+<form id="fdm" enctype="multipart/form-data" style="display: block;">
+  <input type="file" id='audio' name="resource" accept="audio/*" />
+</form>
+
+<!-- 查看图片 -->
+<div class="watchImgBox" *ngIf="showWatchImg">
+	<div class="imgBox">
+		<img src="{{watchUrl}}">
+	</div>
+	<div class="close" (click)="closeWatchImgBox()">
+		<div class="closeMiddle">
+			<div class="closeIn">
+				<i class="fa fa-close"></i>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="imgBg" *ngIf="showWatchImg"></div>

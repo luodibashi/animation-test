@@ -1,0 +1,76 @@
+<div class="header">
+	<img class="schoolLogo" src="{{schoolPic}}">
+	<p class="schoolName">麦学习</p>
+</div>
+<div class="middle" *ngIf="loginType===2">
+	<p class="title">教师登录<span *ngIf="loginInfo">{{loginInfo}}</span></p>
+	<div class="loginInfo" *ngIf="!showSelectSchool">
+		<form>
+			<div class="account">
+				<i class="fa fa-user"></i>
+				<input type="text" name="userName" placeholder="请输入账号" [(ngModel)]="userName" (blur)="validateAccount()">
+				<span *ngIf="userNameErr">{{userNameErr}}</span>
+			</div>
+			<div class="password">
+				<i class="fa fa-lock"></i>
+				<input type="password" name="password" placeholder="请输入密码" [(ngModel)]="password" (blur)="validatePassword()">
+				<span *ngIf="passwordErr">{{passwordErr}}</span>
+			</div>
+			<div class="captcha">
+				<i class="fa fa-shield"></i>
+				<input type="text" name="captcha" placeholder="请输入验证码" [(ngModel)]="captcha" (blur)="validateCaptcha()">
+				<span *ngIf="captchaErr">{{captchaErr}}</span>
+				<img (click)="refreshCode()" src="{{base64Img}}">
+			</div>
+		</form>
+	</div>
+	<div class="chooseBox" *ngIf="showSelectSchool">
+		<p>请选择要登录的机构</p>
+		<div class="schoolList">
+			<ul>
+				<li *ngFor="let school of schoolList; let i = index;">
+					<div class="school" (click)="chooseSchool(school.sid)" [ngClass]="{'selected':school.sid===choosedSid}">
+						<div class="checkBox">
+							<div class="middle">
+								<div class="last">&nbsp;</div>
+							</div>
+						</div>
+						<div class="name">{{school.schoolName}}</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="loginBt">
+		<div *ngIf="!showSelectSchool" (click)="signIn()">{{loginStatus}}</div>
+		<div *ngIf="showSelectSchool" (click)="signInDone()">{{loginStatus}}</div>
+	</div>
+	<div class="service">
+		<div class="register" *ngIf="isAllowRegister===1" (click)="fastRegistration()">快速注册</div>
+		<div class="return" (click)="forgotPassword()">找回密码</div>
+	</div>
+</div>
+
+<div class="middleWx" *ngIf="loginType===1">
+	<!-- 微信登录 -->
+	<div class="loginBtWx">
+		<div (click)="weChatSignIn()">
+			<i class="fa fa-wechat fa-2x"></i>
+			微信登录
+		</div>
+	</div>
+</div>
+
+<div class="other">
+	<div class="loginWay">其他登录方式</div>
+	<div *ngIf="loginType===2">
+		<div class="weixin" [ngClass]="{'allow':wxBrowser&&appid,'forbid':!wxBrowser||!appid}" (click)="checkLoginType(1)">
+			<i class="fa fa-wechat fa-2x"></i>
+		</div>
+	</div>
+	<div *ngIf="loginType===1">
+		<div class="weixin allow" (click)="checkLoginType(2)">
+			<i class="fa fa-keyboard-o fa-2x"></i>
+		</div>
+	</div>
+</div>

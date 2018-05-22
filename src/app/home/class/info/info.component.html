@@ -1,0 +1,39 @@
+<app-header [navType]="navType"></app-header>
+<div class="box">
+	<div class="child">
+		<div class="info">
+			<div class="header">
+				<div class="order">
+					<p class="orderName">班级编号</p>
+					<p class="orderNumber">{{cid}}</p>
+				</div>
+				<div class="nature">
+					<p class="natureNumber">已参与:{{userNumber}}/{{maxNumber}}</p>
+					<p class="natureInfo">{{['','公共班级','我的班级'][type]}}</p>
+				</div>
+			</div>
+			<div class="name">
+				<div class="nMiddle">
+					<div class="nBottom">{{className}}</div>
+				</div>
+			</div>
+			<div class="qrcode-zone">
+        <div id="qrcode" [innerHTML]="qrcodeImg"></div>
+        <p>班级二维码</p>
+      </div>
+      <div class="remark">
+      	<div class="photo">
+      		<img src="{{photo?photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+      	</div>
+      	<div class="remarkInfo">
+      		<div class="infoBox">
+      			{{remarkName?remarkName:'该班级还没有备注说明哦'}}
+      		</div>
+      	</div>
+      </div>
+		</div>
+		<div class="update">
+			<div (click)="updateClassInfo()">修改班级信息</div>
+		</div>
+	</div>
+</div>

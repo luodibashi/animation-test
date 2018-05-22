@@ -1,0 +1,65 @@
+<app-header [navType]="navType"></app-header>
+<div class="box">
+	<div class="child">
+		<div class="search">
+			<div class="input">
+				<input type="text" name="account" placeholder="请输入教师账号" [(ngModel)]="account">
+				<div class="btn">
+					<div (click)="searchTeacher()">搜索</div>
+				</div>
+			</div>
+			<div class="teacherInfo">
+				<div class="info" *ngIf="showTeacherInfo">
+					<div class="headImg">
+						<img src="{{searchTeacherInfo.photo?searchTeacherInfo.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+					</div>
+					<div class="name">{{searchTeacherInfo.teacherName}}</div>
+					<div class="launch" (click)="sendLaunch(searchTeacherInfo.tid)">发送邀请</div>
+				</div>
+				<div class="tips" *ngIf="!showTeacherInfo">
+					<div *ngIf="!searchErr">您可以邀请教师一起管理班级</div>
+					<div *ngIf="searchErr">{{searchErr}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="teacher">
+			<p class="manageTitle">班级教师管理</p>
+			<ul>
+				<li *ngFor="let teacher of teacherList; let i = index;">
+					<div class="manager">
+						<div class="img">
+							<img src="{{teacher.photo?teacher.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+						</div>
+						<div class="userInfo">
+							<p class="name">{{teacher.teacherName}}</p>
+							<p class="account">{{teacher.email?teacher.email:(teacher.phone?teacher.phone:teacher.account)}}</p>
+						</div>
+						<div class="doSomeThing">
+							<div class="case">
+								<div class="master" *ngIf="teacher.isOwner===1">班主任</div>
+								<div class="attorn" *ngIf="!teacher.isOwner&&isOwner===1&&teacher.isAgree===1">
+									<div (click)="attorn(teacher.tid)">转让</div>
+								</div>
+								<div class="waitJoin" *ngIf="!teacher.isAgree">待加入</div>
+								<div class="kickOut" *ngIf="isOwner===1&&teacher.tid!=tid">
+									<div (click)="kickOut(teacher.tid)">踢出</div>
+								</div>
+								<div class="quit" *ngIf="!teacher.isOwner&&teacher.tid===tid">
+									<div (click)="quit(teacher.tid)">退出</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="workSet">
+			<div class="setBox">
+				<div class="title">布置作业仅自己可见</div>
+				<div class="checkBox selected" [ngClass]="{'selected':isShow===1}" (click)="changeShowWorkType()">
+					<i class="fa fa-check" *ngIf="isShow===1"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

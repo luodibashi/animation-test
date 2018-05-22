@@ -1,0 +1,35 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">班级管理</div>
+	</div>
+<!-- 	<div class="right">
+		<div class="name">right</div>
+		<i class="fa fa-plus"></i>
+	</div> -->
+</div>
+<div class="navPublic">
+	<div class="navMiddle">
+		<div class="info menu" [ngClass]="{'selected':navType===6}">
+			<div (click)="goToClassInfo()">班级信息</div>
+		</div>
+		<div class="student menu" [ngClass]="{'selected':navType===1}">
+			<div (click)="goToClassStudent()">班级学生</div>
+		</div>
+		<div class="teacher menu" [ngClass]="{'selected':navType===2}">
+			<div (click)="goToClassTeacher()">班级教师</div>
+		</div>
+		<div class="work menu" [ngClass]="{'selected':navType===3}">
+			<div (click)="goToClassWork()">班级作业</div>
+		</div>
+		<div class="question menu" [ngClass]="{'selected':navType===4}">
+			<div (click)="goToClassQuestionBank()">班级题库</div>
+		</div>
+		<div class="tutor menu" [ngClass]="{'selected':navType===5}">
+			<div (click)="goToClassTutor()">班级助教</div>
+		</div>
+	</div>
+</div>

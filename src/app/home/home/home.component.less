@@ -1,0 +1,119 @@
+.top{
+	background: #4e616e;
+  height: 14rem;
+  .info{
+    padding-top: 3.5rem;
+    overflow: hidden;
+    padding-left: 2rem;
+    .img{
+			width: 5rem;
+			height: 5rem;
+			border-radius: 50%;
+			float: left;
+	    border: 0.2rem solid #f7f7f7;
+			img{
+				width: 100%;
+		    height: 100%;
+		    display: block;
+		    border-radius: 50%;
+			}
+    }
+    .user{
+    	float: left;
+    	height: 5.4rem;
+    	padding-left: 1rem;
+			.name{
+				font-size: 1.6rem;
+		    color: #fff;
+		    line-height: 2.7rem;
+			}
+			.account{
+		    line-height: 2.7rem;
+		    font-size: 1.6rem;
+		    color: #8c96a0;
+			}
+    }
+  }
+}
+@width: 100%;
+.content{
+	.title{
+    background: #eeeef3;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    padding-left: 10px;
+    color: #949298;
+    font-size: 1.4rem;
+	}
+	.menu{
+		display: flex;
+		display: -webkit-flex; /*safari*/
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+		.child{
+			width: @width/3;
+			height: 10rem;
+			text-align: center;
+			align-self: center;
+			.middle{
+				height: 100%;
+				border-bottom: 1px solid #efefef;
+				i{
+					margin: 2.2rem auto .5rem;
+			    color: #1fbd6a;
+			    background: #fff;
+			    line-height: 2.6rem;
+			    width: 2.6rem;
+			    height: 2.6rem;
+			    font-size: 2.2rem;
+				}
+				p{
+					font-size: 1.6rem;
+				}
+			}
+			.sideRight{
+				border-right: 1px solid #efefef;
+			}
+			.sideLeft{
+				border-left: 1px solid #efefef;
+			}
+			.workList{
+		
+			}
+			.classList{
+				i{
+					color: #913ce6;
+				}
+			}
+			.questionList{
+				i{
+					color: #913ce6;
+				}
+			}
+			.publicWork{
+				i{
+					color: #3ab8df;
+				}
+			}
+			.saleQuestion{
+				i{
+					color: #913ce6;
+				}
+			}
+			.personal{
+				i{
+					color: #78909c;
+				}
+			}
+			.disabled{
+				color: #d3d3d3;
+				i{
+					color: #d3d3d3;
+				}
+			}
+		}
+	}
+}

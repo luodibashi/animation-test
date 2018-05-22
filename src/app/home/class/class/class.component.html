@@ -1,0 +1,94 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title" *ngIf="pageType===1">我的班级</div>
+		<div class="title" *ngIf="pageType===2">我的班级邀请</div>
+	</div>
+	<div class="right" (click)="createClass()">
+		<!-- <div class="name">right</div> -->
+		<i class="fa fa-plus"></i>
+	</div>
+</div>
+<!-- 班级列表 -->
+<div class="box" *ngIf="pageType===1">
+	<div class="invitation" *ngIf="havaInvitation">
+		<div class="pending" (click)="dealWithInvitation()">您有待处理的公共班级邀请，快去处理吧</div>
+	</div>
+	<div class="classBox" *ngIf="count>0">
+		<ul>
+			<li *ngFor="let class of classList; let i=index;">
+				<div class="info" (click)="enterTheClass(class.cid)">
+					<div class="header">
+						<div class="order">
+							<p class="orderName">班级编号</p>
+							<p class="orderNumber">{{class.cid}}</p>
+						</div>
+						<div class="nature">
+							<p class="natureNumber">已参与:{{class.userNumber}}/{{class.maxNumber}}</p>
+							<p class="natureInfo">{{['','公共班级','我的班级'][class.type]}}</p>
+						</div>
+					</div>
+					<div class="name">
+						<div class="nMiddle">
+							<div class="nBottom">{{class.className}}</div>
+						</div>
+					</div>
+					<div class="teacher">
+						<div class="user" *ngFor="let teacher of class.teacherList;">
+							<i class="fa fa-user" [ngClass]="{'owner':teacher.isOwner===1}"></i>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="moreClass" *ngIf="count>0">
+		<div class="getMore" *ngIf="loadMore" (click)="getMoreClass()">获取更多班级</div>
+		<div class="noMore" *ngIf="!loadMore">我是有底线的</div>
+	</div>
+	<div class="moreClass" *ngIf="count<1">
+		<div class="getMore">您还没有班级哦，点击创建吧</div>
+	</div>
+</div>
+<!-- 邀请列表 -->
+<div class="box" *ngIf="pageType===2">
+	<div class="classBox">
+		<ul>
+			<li *ngFor="let class of pendingList;let i=index">
+				<div class="info">
+					<div class="header">
+						<div class="order">
+							<p class="orderName">班级编号</p>
+							<p class="orderNumber">{{class.cid}}</p>
+						</div>
+						<div class="nature">
+							<p class="natureNumber">已参与:{{class.userNumber}}/{{class.maxNumber}}</p>
+							<p class="natureInfo">公共班级</p>
+						</div>
+					</div>
+					<div class="name">
+						<div class="nMiddle">
+							<div class="nBottom">{{class.className}}</div>
+						</div>
+					</div>
+					<div class="teacher">
+						<div class="user" *ngFor="let teacher of class.teacherList;">
+							<i class="fa fa-user" [ngClass]="{'owner':teacher.isOwner===1}"></i>
+						</div>
+					</div>
+				</div>
+				<div class="dealBox">
+					<div class="yes">
+						<div (click)="agree(class.cid)">同意</div>
+					</div>
+					<div class="no">
+						<div (click)="refuse(class.cid)">拒绝</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

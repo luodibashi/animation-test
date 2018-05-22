@@ -1,0 +1,55 @@
+<app-header [navType]="navType"></app-header>
+<div class="box">
+	<div class="child">
+		<div class="searchBox">
+			<div class="input">
+				<input type="text" name="workName" placeholder="请输入作业名字" [(ngModel)]="workName">
+				<div class="searchBtn">
+					<div (click)="searchClassWork()">搜索</div>
+				</div>
+			</div>
+		</div>
+		<div class="work">
+			<ul *ngIf="count>0">
+				<li *ngFor="let work of workList; let i=index;">
+					<div class="workTitle">
+						<i class="fa fa-clock-o"></i>
+						<span>{{work.startTime | date:"y/MM/dd hh:mm"}}</span>
+						-
+						<span *ngIf="work.endTime">{{work.endTime | date:"y/MM/dd hh:mm"}}</span>
+						<span *ngIf="!work.endTime">不限时</span>
+						<!-- <span class="time">规定用时：{{work.durationTime?work.durationTime:'不限时'}}</span> -->
+					</div>
+					<div class="workBox">
+						<div class="workInfo" (click)="correct(work.workId)">
+							<p class="title">{{work.workName}}</p>
+							<p>班级编号：{{work.cid}}</p>
+							<p>班级名称：{{work.className}}</p>
+							<p>规定用时：{{work.durationTime | DurationTime}}</p>
+							<p>提交人数：{{work.submitNumber}}人</p>
+							<p>待批改人数：{{work.noneCorrectNumber}}人</p>
+						</div>
+						<div class="workReport" (click)="viewReport(work.cid,work.workId)">
+							<i class="fa fa-area-chart"></i>&nbsp;查看成绩报告
+						</div>
+						<div class="workStatus" [ngClass]="{'status1':work.workStatus==0||work.workStatus==1,'status2':work.workStatus==2||work.workStatus==4,'status3':work.workStatus==3,'status4':work.workStatus==5||work.workStatus==6||work.workStatus==7}" (click)="correct(work.workId)">
+							<div class="status">
+								<div>{{workStatus[work.workStatus]}}</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="tipsWork">
+				<div class="loadMore" *ngIf="loadMore">
+					<div (click)="getMoreWork()">获取更多作业</div>
+				</div>
+				<div class="loadMore" *ngIf="!loadMore&&count>0">我是有底线的</div>
+				<div class="loadMore" *ngIf="count<1">
+					<span *ngIf="showType===1">该班级还没有布置过作业哦</span>
+					<span *ngIf="showType===2">您要搜索的作业不存在哦</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

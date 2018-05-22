@@ -1,0 +1,74 @@
+<div class="top">
+	<div class="info">
+		<div class="img">
+			<img src="{{teacherInfo.photo?teacherInfo.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+		</div>
+		<div class="user">
+			<p class="name">{{teacherInfo.teacherName}}</p>
+			<p class="account">{{teacherInfo.email?teacherInfo.email:(teacherInfo.account?teacherInfo.account:teacherInfo.phone)}}</p>
+		</div>
+	</div>
+</div>
+<div class="content">
+	<p class="title">
+		<i class="fa fa-university"></i>
+		麦学习
+	</p>
+	<div class="menu">
+		<div class="child">
+			<div class="middle sideRight" (click)="gotoWorkList()">
+				<i class="fa fa-file-text fa-2x"></i>
+				<p>已布置作业</p>
+			</div>
+		</div>
+		<div class="child">
+			<div class="middle classList sideRight" (click)="gotoMyClass()">
+				<i class="fa fa-cube fa-2x"></i>
+				<p>我的班级</p>
+			</div>
+		</div>
+		<div class="child">
+			<div class="middle disabled">
+				<i class="fa fa-puzzle-piece fa-2x"></i>
+				<p>我的习题库</p>
+			</div>
+		</div>
+		<div class="child">
+			<div class="middle publicWork sideRight" (click)="gotoArrange()">
+				<i class="fa fa-pencil fa-2x"></i>
+				<p>布置作业</p>
+			</div>
+		</div>
+		<div class="child">
+			<div class="middle sideRight" (click)="gotoWaitCorrection()">
+				<i class="fa fa-inbox fa-2x"></i>
+				<p>待批改作业</p>
+			</div>
+		</div>
+<!-- 		<div class="child">
+			<div class="middle disabled sideRight">
+				<i class="fa fa-inbox fa-2x"></i>
+				<p>已发售习题</p>
+			</div>
+		</div> -->
+		<div class="child">
+			<div class="middle personal" (click)="gotoPersonal()">
+				<i class="fa fa-user fa-2x"></i>
+				<p>个人中心</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content">
+	<p class="title">
+		第三方服务
+	</p>
+	<div class="menu">
+		<div class="child">
+			<div class="middle sideRight" (click)="gotoWechat()">
+				<i class="fa fa-wechat fa-2x"></i>
+				<p>微信绑定</p>
+			</div>
+		</div>
+	</div>
+</div>

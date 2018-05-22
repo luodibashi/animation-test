@@ -1,0 +1,200 @@
+.navbar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4rem;
+  background-color: #21292c;
+  overflow: hidden;
+  z-index: 10;
+  .left{
+		float: left;
+		width: 20%;
+		color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    // text-align: center;
+    i{
+	    padding-left: 1rem;
+    }
+  }
+  .middle{
+		float: left;
+		width: 60%;
+		color: #fff;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .right{
+		float: left;
+		width: 20%;
+		color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: right;
+    .name{
+    	padding-right: 1rem;
+    }
+  }
+}
+.box{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  .now{
+    padding: 1rem 1rem 0;
+    overflow: hidden;
+    border-bottom: 1px dashed #ddd;
+    p{
+      line-height: 3rem;
+      font-size: 1.6rem;
+    }
+    .child{
+      float: left;
+      margin-right: 1rem;
+      text-align: center;
+      background: #ddd;
+      border-radius: 4px;
+      height: 4rem;
+      line-height: 4rem;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+      span{
+        font-size: 1.6rem;
+      }
+      i{
+        line-height: 4rem;
+        width: 2rem;
+      }
+    }
+    .add{
+      padding-right: 1rem;
+      background: #009245;
+      color: #fff;
+    }
+  }
+}
+
+.newBox{
+  position: fixed;
+  top: 20%;
+  left: 1rem;
+  right: 1rem;
+  z-index: 12;
+  max-height: 60%;
+  overflow-y: auto;
+  border-radius: 4px;
+  .title{
+    background: #fff;
+    padding: 1rem;
+    border-radius: 4px 4px 0 0;
+    font-size: 1.6rem;
+  }
+  .stage{
+    background: #fff;
+    padding: 0 1rem 1rem;
+    font-size: 1.6rem;
+    .stageName{
+      
+    }
+    .grade{
+      overflow: hidden;
+      .gradeOut{
+        overflow: hidden;
+        float: left;
+        position: relative;
+        .gradeName{
+          float: left;
+          margin-right: 1rem;
+          background: #e6e4e4;
+          line-height: 4rem;
+          padding: 0 1rem;
+          border-radius: 4px;
+          margin-bottom: 1rem;
+        }
+        .childSelected{
+          background: #009245;
+          color: #fff;
+        }
+        .disable{
+          background: #6dd095;
+          color: #fff;
+        }
+        i{
+          position: absolute;
+          right: 1.2rem;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .subject{
+    background: #fff;
+    padding: 1rem 1rem;
+    font-size: 1.6rem;
+    .middle{
+      overflow: hidden;
+      div{
+        overflow: hidden;
+        float: left;
+        position: relative;
+        .child{  
+          float: left;
+          margin-right: 1rem;
+          background: #e6e4e4;
+          line-height: 4rem;
+          padding: 0 1.5rem;
+          border-radius: 4px;
+          margin-bottom: 1rem;
+        }
+        .childSelected{
+          background: #009245;
+          color: #fff;
+        }
+        .disable{
+          background: #6dd095;
+          color: #fff;
+        }
+        i{
+          position: absolute;
+          right: 1.2rem;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .doDiv{
+    background: #f3f3f3;
+    padding: 1rem;
+    border-radius: 0 0 4px 4px;
+    font-size: 1.6rem;
+    overflow: hidden;
+    .sure{
+      float: right;
+      background: #009245;
+      color: #fff;
+      padding: 1rem 2rem;
+      margin-left: 1rem;
+      border-radius: 4px;
+    }
+    .cancel{
+      float: right;
+      background: #bfbbbb;
+      color: #fff;
+      padding: 1rem 2rem;
+      margin-left: 1rem;
+      border-radius: 4px;
+    }
+  }
+}
+.bg{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  z-index: 11;
+}

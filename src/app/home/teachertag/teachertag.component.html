@@ -1,0 +1,78 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">
+			<span>教学阶段及科目</span>
+		</div>
+	</div>
+</div>
+<div class="box">
+	<div class="now">
+		<p>阶段年级</p>
+		<div *ngIf="stageList.length>0">
+			<ul *ngFor="let stage of stageList; let i=index;">
+				<li *ngFor="let grade of stage['childList']; let m=index;">
+					<div class="child">
+						<span>{{stage.tagName}}{{grade.tagName}}</span>
+						<i class="fa fa-close fa-2x" (click)="deleteStageTag(i,m)"></i>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="child add" (click)="addStage()">
+			<span>新增阶段年级</span>
+		</div>
+	</div>
+	<div class="now">
+		<p>科目</p>
+		<div *ngIf="subjectList.length>0">
+			<div class="child" *ngFor="let subject of subjectList; let i=index;">
+				<span>{{subject.tagName}}</span>
+				<i class="fa fa-close fa-2x" (click)="deleteSubjectTag(i)"></i>
+			</div>
+		</div>
+		<div class="child add" (click)="addSubject()">
+			<span>新增科目</span>
+		</div>
+	</div>
+</div>
+<!-- 阶段年级 -->
+<div class="newBox" *ngIf="editType==1">
+	<p class="title">请选择教学阶段</p>
+	<div>
+		<div class="stage" *ngFor="let stage of publicStageList; let k = index;">
+			<p class="stageName">{{stage.tagName}}</p>
+			<div class="grade">
+				<div class="gradeOut" *ngFor="let grade of stage['gradeList']; let b=index;">
+					<div class="gradeName" [ngClass]="{'disable':grade?.isChoose==1,'childSelected':selectedTags.indexOf(grade.tagId) !=-1 }" (click)="selectStageTag(k,b)">{{grade.tagName}}</div>
+					<i *ngIf="grade?.isChoose==1" class="fa fa-check"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="doDiv">
+		<div class="sure" (click)="addStageNow()">确定</div>
+		<div class="cancel" (click)="cancelAdd()">取消</div>
+	</div>
+</div>
+<!-- 科目 -->
+<div class="newBox" *ngIf="editType==2">
+	<p class="title">请选择教学科目</p>
+	<div class="subject">
+		<!-- <p class="stageName">科目名称</p> -->
+		<div class="middle">
+			<div *ngFor="let subject of publicSubjectList;let d = index;">
+				<div class="child" [ngClass]="{'disable':subject?.isChoose==1,'childSelected':selectedTags.indexOf(subject.tagId) !=-1 }" (click)="selectSubject(d)">{{subject.tagName}}</div>
+				<i *ngIf="subject?.isChoose==1" class="fa fa-check"></i>
+			</div>
+		</div>
+	</div>
+	<div class="doDiv">
+		<div class="sure" (click)="addSubjectNow()">确定</div>
+		<div class="cancel" (click)="cancelAdd()">取消</div>
+	</div>
+</div>
+<div class="bg" *ngIf="editType==1||editType==2"></div>

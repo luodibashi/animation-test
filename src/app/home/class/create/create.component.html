@@ -1,0 +1,62 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">{{titleName}}</div>
+	</div>
+<!-- 	<div class="right" (click)="createClass()">
+		<div class="name">right</div>
+		<i class="fa fa-plus"></i>
+	</div> -->
+</div>
+<div class="box">
+	<div class="child">
+		<form>
+			<span class="title">班级名称</span>
+			<div class="wide">
+				<input class="input" type="text" name="className" placeholder="请输入班级名称" [(ngModel)]="className">
+			</div>
+		</form>
+	</div>
+	<p class="tips">*请输入班级名称，该项为必填项</p>
+	<div class="child">
+		<form>
+			<span class="title">班级人数</span>
+			<div class="wide">
+				<input class="input" type="text" name="maxUserNumber" placeholder="请填写班级人数" [(ngModel)]="maxUserNumber" (blur)="validMaxNumber()">
+			</div>
+		</form>
+	</div>
+	<p class="tips">*班级人数最大可设定为200人</p>
+	<div class="child">
+		<form>
+			<span class="title">班级密码</span>
+			<div class="wide">
+				<input class="input" type="text" name="password" placeholder="设置班级密码" [(ngModel)]="password" (blur)="validPassword()">
+			</div>
+		</form>
+	</div>
+	<p class="tips">可设置6-8位随机数字</p>
+	<div class="child">
+		<form>
+			<span class="title">班级留言</span>
+			<div class="wide">
+				<input class="input" type="text" name="message" placeholder="设置班级留言" [(ngModel)]="message">
+			</div>
+		</form>
+	</div>
+	<p class="tips">此处为班级留言</p>
+	<div class="createBtn">
+		<div class="yes" *ngIf="pageType===1">
+			<div (click)="createClass()">确定创建</div>
+		</div>
+		<div class="yes" *ngIf="pageType===2">
+			<div (click)="updateClass()">确定修改</div>
+		</div>
+		<div class="cancel">
+			<div (click)="createCancel()">取消</div>
+		</div>
+	</div>
+</div>

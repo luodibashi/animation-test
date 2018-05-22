@@ -1,0 +1,314 @@
+.header{
+	text-align: center;
+	.schoolLogo{
+    width: 8rem;
+    height: 8rem;
+    font-size: 2rem;
+    margin-top: 4rem;
+    border-radius: 50%;
+	}
+	.schoolName{
+    display: block;
+    font-weight: 400;
+    color: #009245;
+    font-size: 2rem;
+    width: 90%;
+    margin: 1rem auto 0;
+	}
+}
+.middle{
+	margin: 3rem 1rem 0;
+	.title{
+		color: #777;
+    font-size: 1.6rem;
+    text-align: left;
+    line-height: 2rem;
+    position: relative;
+    span{
+	    position: absolute;
+	    right: 0;
+	    color: red;
+    }
+	}
+	.loginInfo{
+		padding: 1rem 0;
+		form{
+			.account{
+				height: 3rem;
+				padding: 1rem;
+				border-top: 1px solid #ddd;
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-radius: 4px 4px 0 0; 
+				position: relative;
+				i{
+					position: absolute;
+					display: block;
+			    width: 3rem;
+			    line-height: 3rem;
+			    position: absolute;
+			    transform: translate(0);
+			    color: #888;
+	        text-align: center;
+    			font-size: 2rem;
+				}
+				input{
+					border: none;
+					margin: 0;
+					padding: 0;
+					font-size: 1.6rem;
+					width: 100%;
+					line-height: 3rem;
+					text-indent: 4rem;
+				}
+				span{
+			    position: absolute;
+			    right: 1rem;
+			    display: block;
+			    line-height: 3rem;
+			    top: 1rem;
+			    color: red;
+			    font-size: 1.6rem;
+				}
+			}
+			.password{
+				height: 3rem;
+				padding: 1rem;
+				border-top: 1px solid #ddd;
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				position: relative;
+				i{
+					position: absolute;
+					display: block;
+			    width: 3rem;
+			    line-height: 3rem;
+			    position: absolute;
+			    transform: translate(0);
+			    color: #888;
+	        text-align: center;
+    			font-size: 2rem;
+				}
+				input{
+					border: none;
+					margin: 0;
+					padding: 0;
+					font-size: 1.6rem;
+					width: 100%;
+					line-height: 3rem;
+					text-indent: 4rem;
+				}
+				span{
+			    position: absolute;
+			    right: 1rem;
+			    display: block;
+			    line-height: 3rem;
+			    top: 1rem;
+			    color: red;
+			    font-size: 1.6rem;
+				}
+			}
+			.captcha{
+				height: 3rem;
+				padding: 1rem;
+				border: 1px solid #ddd;
+				border-radius: 0 0 4px 4px;
+				position: relative;
+				overflow: hidden;
+				i{
+					position: absolute;
+					display: block;
+			    width: 3rem;
+			    line-height: 3rem;
+			    position: absolute;
+			    transform: translate(0);
+			    color: #888;
+	        text-align: center;
+    			font-size: 2rem;
+				}
+				input{
+					border: none;
+					margin: 0;
+					padding: 0;
+					font-size: 1.6rem;
+					width: 60%;
+					line-height: 3rem;
+					text-indent: 4rem;
+					float: left;
+				}
+				span{
+			    position: absolute;
+			    right: 40%;
+			    display: block;
+			    line-height: 3rem;
+			    top: 1rem;
+			    color: red;
+			    font-size: 1.6rem;
+				}
+				img{
+					float: right;
+					display: block;
+				}
+			}
+		}
+	}
+	.chooseBox{
+		padding: 1rem 0;
+		height: 15rem;
+		p{
+	    line-height: 3rem;
+	    font-size: 1.6rem;
+	    color: #4e9e58;
+		}
+		.schoolList{
+			height: 12rem;
+			overflow-y: auto;
+			ul{
+				li{
+					line-height: 4rem;
+					.school{
+						position: relative;
+						font-size: 1.6rem;
+						.checkBox{
+							width: 4rem;
+							height: 4rem;
+							position: absolute;
+							left: 0;
+							.middle{
+								width: 2rem;
+								height: 2rem;
+								margin: 1rem;
+								border: 1px solid #ddd;
+								border-radius: 50%;
+								.last{
+									width: 0.8rem;
+									height: 0.8rem;
+									margin: 0.6rem;
+									background: #ddd;
+									border-radius: 50%;
+								}
+							}
+						}
+						.name{
+							padding-left: 4rem;
+						}
+					}
+					.selected{
+				    background: #ecf9eb;
+    				border-radius: 4px;
+						.checkBox{
+							.middle{
+								border: 1px solid #009245;
+								.last{
+									background: #009245;
+								}
+							}
+						}
+						.name{
+							color: #009245;
+						}
+					}	
+				}
+			}
+		}
+	}
+	.loginBt{
+		width: 100%;
+    text-align: center;
+    line-height: 5rem;
+    background: #009245;
+    border-radius: 4px;
+    font-size: 1.8rem;
+    color: #fff;
+		div{
+
+		}
+	}
+	.service{
+    overflow: hidden;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    color: #656565;
+    line-height: 2rem;
+		.register{
+			float: left;
+		}
+		.return{
+			float: right;
+		}
+	}
+}
+.middleWx{
+	margin: 3rem 1rem 0;
+	padding: 19rem 0 3rem;
+	.loginBtWx{
+		width: 100%;
+    text-align: center;
+    line-height: 5rem;
+    background: #009245;
+    border-radius: 4px;
+    font-size: 1.8rem;
+    color: #fff;
+		div{
+			position: relative;
+			i{
+		    position: absolute;
+		    left: 1rem;
+		    font-size: 3rem;
+		    line-height: 5rem;
+			}
+		}
+	}
+}
+.other{
+	margin-top: 3rem;
+  margin-bottom: 4rem;
+  border-top: 1px dashed #d2d2d2;
+  position: relative;
+  .loginWay{
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    top: -1rem;
+    text-align: center;
+    background: #fff;
+    font-size: 1.5rem;
+    color: #7b7b7b;
+  }
+  .weixin{
+  	width: 5rem;
+    height: 5rem;
+    margin: 2rem auto 0;
+    border-radius: 50%;
+    text-align: center;
+    i{
+	    line-height: 5rem;
+	    font-size: 3rem;
+    }
+  }
+  .allow{
+    border: 1px solid #009245;
+    i{
+	    color: #009245;
+    }
+  }
+  .forbid{
+    border: 1px solid #d4d4d4;
+    i{
+	    color: #d4d4d4;
+    }
+  }
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */ 
+font-size:1.6rem;
+} 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+font-size:1.6rem;
+} 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+font-size:1.6rem;
+} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+font-size:1.6rem;
+}

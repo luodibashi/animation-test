@@ -1,0 +1,25 @@
+<div class="box" *ngIf="showBox">
+	<div class="font" (click)="showBoxImg()">a</div>
+	<div class="font">b</div>
+	<div class="font">c</div>
+	<div class="font">e</div>
+	<div class="font">f</div>
+	<div class="font">g</div>
+	<div class="font">h</div>
+	<div class="font">i</div>
+	<div class="font">j</div>
+	<div class="font">k</div>
+	<div class="font">l</div>
+	<div class="font">m</div>
+</div>
+<div class="imgBox" *ngIf="!showBox">
+	<div class="imgDiv">
+		<img (click)="closeImg()" src="http://www.maixuexi.cn/resource/image/activity/top5.jpg">
+	</div>
+</div>
+
+<svg width="300px" height="175px" version="1.1">
+    <path fill="transparent" stroke="#888888" stroke-width="1" d="M10 80 Q 77.5 10, 145 80 T 280 80" class="path"></path>
+</svg>
+
+<div class="ball"></div>

@@ -1,0 +1,215 @@
+.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background-color: #21292c;
+  overflow: hidden;
+  z-index: 10;
+  .left{
+    float: left;
+    width: 20%;
+    color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    // text-align: center;
+    i{
+      padding-left: 1rem;
+    }
+  }
+  .middle{
+    float: left;
+    width: 60%;
+    color: #fff;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+  }
+  .right{
+    float: left;
+    width: 20%;
+    color: #009245;
+    line-height: 4rem;
+    font-size: 1.8rem;
+    text-align: right;
+    .name{
+      padding-right: 1rem;
+    }
+    i{
+      padding-right: 1rem;
+    }
+  }
+}
+.box{
+  position: fixed;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background: #f2f2f2;
+  .child{
+    padding: 1rem .5rem;
+    .searchBox{
+      box-shadow: 0 1px 6px #ccc;
+      -moz-box-shadow: #ccc 0 1px 6px;
+      -webkit-box-shadow: #ccc 0 1px 6px;
+      border-radius: 4px;
+      background: #fff;
+      overflow: hidden;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      .input{
+        overflow: hidden;
+        // padding-bottom: 1rem;
+        // border-bottom: 1px dashed #ddd;
+        input{
+          border: none;
+          height: 40px;
+          line-height: 40px;
+          background: #f1f1f1;
+          width: 70%;
+          text-indent: 1rem;
+          font-size: 1.6rem;
+          border-radius: 4px;
+          float: left;
+        }
+        .searchBtn{
+          float: right;
+          width: 30%;
+          div{
+            line-height: 40px;
+            text-align: center;
+            margin-left: 1rem;
+            // background: #4caf50;
+            border-radius: 4px;
+            font-size: 1.6rem;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+          }
+        }
+      }
+    }
+    .work{
+      ul{
+        li{
+          padding-bottom: 2rem;
+          .workTitle{
+            line-height: 2rem;
+            font-size: 1.4rem;
+            color: #6b6b6b;
+            overflow: hidden;
+            .time{
+              float: right;
+            }
+          }
+          .workBox{
+            box-shadow: 0 1px 6px #ccc;
+            -moz-box-shadow: #ccc 0 1px 6px;
+            -webkit-box-shadow: #ccc 0 1px 6px;
+            border-radius: 4px;
+            background: #fff;
+            padding: 1rem 0 0 0;
+            .workInfo{
+              padding: 0 1rem 1rem;
+              .title{
+                font-size: 2rem;
+                padding-bottom: 1rem;
+              }
+              p{
+                font-size: 1.4rem;
+                color: #5a5a5a;
+                padding-bottom: 0.5rem;
+              }
+            }
+            .workReport{
+              text-align: center;
+              line-height: 7rem;
+              font-size: 2rem;
+              border-top: 1px dashed #ddd;
+              border-bottom: 1px dashed #ddd;
+              color: #4caf50;
+            }
+            .workStatus{
+              height: 5rem;
+              border-radius: 0 0 4px 4px;
+              overflow: hidden;
+              .status{
+                float: left;
+                height: 4rem;
+                line-height: 4rem;
+                margin: 0.5rem 0 0 1rem;
+                font-size: 1.6rem;
+                div{
+                  padding: 0 2rem;
+                  border-radius: 4px;
+                }
+              }
+              .number{
+                float: right;
+                padding-right: 1rem;
+                .one{
+                  height: 2rem;
+                  padding-top: 0.5rem;
+                  font-size: 1.6rem;
+                  text-align: right;
+                }
+                .two{
+                  height: 2rem;
+                  font-size: 1.6rem;
+                  text-align: right;
+                }
+              }
+            }
+            .status1{//未开始，准备中
+              background: #4CAF50;
+              color: #fff;
+              .status{
+                div{
+                  background: #37983b;
+                }
+              }
+            }
+            .status2{ //作业中，长期作业中
+              background: #787ad0;
+              color: #fff;
+              .status{
+                div{
+                  background: #6264b7;
+                }
+              }
+            }
+            .status3{ //待批改
+              background: #ffb220;
+              color: #fff;
+              .status{
+                div{
+                  background: #e6a01c;
+                }
+              }
+            }
+            .status4{ //已完成，客观题自动批改已撤销
+              background: #eaeaea;
+              color: #8c8c8c;
+              .status{
+                div{
+                  background: #e0e0e0;
+                }
+              }
+            }
+          }
+        }
+      }
+      .tipsWork{
+        text-align: center;
+        font-size: 1.6rem;
+        padding-bottom: 2rem;
+        line-height: 3rem;
+        color: #4caf50;
+        cursor: pointer;
+      }
+    }
+  }
+}

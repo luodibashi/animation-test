@@ -1,0 +1,158 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">学生报告</div>
+	</div>
+</div>
+<div class="box">
+	<div class="student">
+		<div class="headimg">
+			<img src="{{StudentClassReport?.photo?StudentClassReport?.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+		</div>
+		<div class="name">
+			<p class="mark">
+				{{StudentClassReport?.studentName}}
+				<span *ngIf="StudentClassReport?.remarkName">({{StudentClassReport?.remarkName}})</span>
+			</p>
+			<p class="className">{{classInfo?.className}}</p>
+		</div>
+	</div>
+	<div class="table">
+		<app-line></app-line>
+	</div>
+	<div class="census">
+		<div class="censusBox">
+			<ul>
+				<li>
+					<div class="block right">
+						<p class="title">综合得分</p>
+						<p class="value">{{StudentClassReport?.overallScore}}</p>
+					</div>
+				</li>
+				<li>
+					<div class="block">
+						<p class="title">综合分排名</p>
+						<p class="value">{{StudentClassReport?.overallRanking}}</p>
+					</div>
+				</li>
+				<li>
+					<div class="block right top">
+						<p class="title">作业总次数</p>
+						<p class="value">{{StudentClassReport?.totalWorkNumber}}</p>
+					</div>
+				</li>
+				<li>
+					<div class="block top">
+						<p class="title">我的作答次数</p>
+						<p class="value">{{StudentClassReport?.mineWorkNumber}}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="submission">
+		<div class="title">我的作答记录</div>
+		<div class="workList">
+			<ul *ngIf="count>0">
+				<li *ngFor="let work of finishWorkList;let i=index;">
+					<div class="work" (click)="getWorkDetail(work.workId)">
+						<div class="workInfo">
+							<p class="workTitle">{{work.workName}}</p>
+							<p class="child">开始作答时间：{{work.getTime | date:"y/MM/dd hh:mm"}}</p>
+							<p class="child">交卷时间：{{work.submitTime | date:"y/MM/dd hh:mm"}}</p>
+							<p class="child">作答时长：{{work.uDurationTime | DurationTime}}</p>
+						</div>
+						<div class="bottom">
+							查看统计报告
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="tips">
+				<div class="more" *ngIf="loadMore">
+					<div (click)="getMore()">加载更多</div>
+				</div>
+				<div class="noneMore" *ngIf="!loadMore&&count>size">我是有底线的</div>
+				<div class="none" *ngIf="count<1">您还没有作答过</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="workReport" *ngIf="showWorkReport">
+	<div class="top">
+		<div class="title">
+			<div class="userInfo">
+				<img src="{{StudentClassReport?.photo?StudentClassReport?.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+				<div class="name">{{StudentClassReport?.studentName}}</div>
+				<div class="close" (click)="closeWorkReport()">关闭</div>
+			</div>
+			<div class="workName">
+				<p class="work">{{StudentClassWorkReport?.workName}}</p>
+				<p class="time">作答时长：{{StudentClassWorkReport?.uDurationTime | DurationTime}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="report">
+		<ul>
+			<li>
+				<div class="rBox">
+					<p class="rName">得分</p>
+					<p class="rValue">{{StudentClassWorkReport?.userScore}}</p>
+				</div>
+			</li>
+			<li>
+				<div class="rBox">
+					<p class="rName">总题量</p>
+					<p class="rValue">{{StudentClassWorkReport?.totalNumber}}</p>
+				</div>
+			</li>
+			<li>
+				<div class="rBox">
+					<p class="rName">排名</p>
+					<p class="rValue">{{StudentClassWorkReport?.rank}}</p>
+				</div>
+			</li>
+			<li>
+				<div class="rBox">
+					<p class="rName">试卷总分</p>
+					<p class="rValue">{{StudentClassWorkReport?.totalScore}}</p>
+				</div>
+			</li>
+			<li>
+				<div class="rBox">
+					<p class="rName">平均分</p>
+					<p class="rValue">{{StudentClassWorkReport?.avgScore}}</p>
+				</div>
+			</li>
+			<li>
+				<div class="rBox">
+					<p class="rName">最高分</p>
+					<p class="rValue">{{StudentClassWorkReport?.maxScore}}</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="question">
+		<ul>
+			<li *ngFor="let question of StudentClassWorkReport?.questionList; let i = index;">
+				<div class="qBox" *ngIf="question.qType===1">
+					<div [ngClass]="{'right':question.isRight===1,'error':question.isRight===0}">
+						<p class="qNumber">{{question.qNumber}}({{question.qScore}}分)</p>
+						<p class="qType">客观题</p>
+						<p class="qScore">得分：{{question.score}}</p>
+					</div>
+				</div>
+				<div class="qBox" *ngIf="question.qType===2">
+					<div class="wait">
+						<p class="qNumber">{{question.qNumber}}({{question.qScore}}分)</p>
+						<p class="qType">主观题</p>
+						<p class="qScore">得分：{{question.score}}</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

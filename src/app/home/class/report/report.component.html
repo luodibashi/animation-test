@@ -1,0 +1,185 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">作业报告</div>
+	</div>
+</div>
+<div class="box">
+	<div class="base" (click)="correct(null,workId)">
+		<div class="nameBox">
+			<p class="name">{{workBaseInfo?.workName}}</p>
+			<p class="child">班级编号：{{cid}}</p>
+			<p class="child">班级名称：{{classInfo?.className}}</p>
+			<p class="child">作业来源：{{classInfo?.teacherName}}</p>
+		</div>
+		<div class="status">
+			<div [ngClass]="{'status1':workBaseInfo?.workStatus==0||workBaseInfo?.workStatus==1,'status2':workBaseInfo?.workStatus==2||workBaseInfo?.workStatus==4,'status3':workBaseInfo?.workStatus==3,'status4':workBaseInfo?.workStatus==5||workBaseInfo?.workStatus==6||workBaseInfo?.workStatus==7}">{{workStatus[workBaseInfo?.workStatus]}}</div>
+		</div>
+	</div>
+	<div class="result">
+		<div class="title">
+			<p class="one">
+				<i class="fa fa-file"></i>&nbsp;本次作业成绩详情
+			</p>
+			<p class="timeInfo">
+				{{workBaseInfo?.startTime | date:"y/MM/dd hh:mm"}}-
+				<span *ngIf="workBaseInfo?.endTime">{{workBaseInfo?.endTime | date:"y/MM/dd hh:mm"}}</span>
+				<span *ngIf="!workBaseInfo?.endTime">不限时</span>
+			</p>
+		</div>
+		<div class="countBox">
+			<ul>
+				<li>
+					<div class="line">
+						<p class="up">满分</p>
+						<p class="down">{{workBaseInfo?.totalScore}}分</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">最高分</p>
+						<p class="down">{{workBaseInfo?.maxScore}}分</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">客观题</p>
+						<p class="down">{{workBaseInfo?.objNumber}}道</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">班级平均分</p>
+						<p class="down">{{workBaseInfo?.avgScore}}分</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">主观题</p>
+						<p class="down">{{workBaseInfo?.subNumber}}道</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">总题量</p>
+						<p class="down">{{workBaseInfo?.subNumber+workBaseInfo?.objNumber}}道</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="time">
+		<div class="countBox">
+			<ul>
+				<li>
+					<div class="line">
+						<p class="up">规定用时</p>
+						<p class="down">{{workBaseInfo?.totalDuration | DurationTime}}</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">布置人数</p>
+						<p class="down">{{workBaseInfo?.totalNumber}}人</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">班级平均用时</p>
+						<p class="down" *ngIf="workBaseInfo?.avgAnswerTime">{{workBaseInfo?.avgAnswerTime | DurationTime}}</p>
+						<p class="down" *ngIf="!workBaseInfo?.avgAnswerTime">暂无人作答</p>
+					</div>
+				</li>
+				<li>
+					<div class="line">
+						<p class="up">已交作业人数</p>
+						<p class="down">{{workBaseInfo?.submitNumber}}人</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="count">
+		<div class="statistics">
+			<div class="btn" (click)="changeShowTable()"><span *ngIf="!showTable">展开</span><span *ngIf="showTable">收起</span>单题统计图表</div>
+		</div>
+		<div class="table" *ngIf="showTable">
+			<!-- <app-chartjs [workId]="workId"></app-chartjs> -->
+			<div class="list">
+				<ul>
+					<li *ngFor="let question of questionList;let i=index;">
+						<p>
+							<span>{{question.qNumber}}.</span>
+							<span>{{['','客观题','主观题'][question.qType]}}</span>
+							<span>({{question.score}}分)</span>
+							<span class="number" *ngIf="question.qType==1">
+								正确答案:
+								<i *ngFor="let op of question.qAnswer">{{option[op]}}</i>
+							</span>
+						</p>
+						<p *ngIf="question.qType==1" class="resultP">
+							<i>答对{{question.rightNumber}}人,答错{{question.wrongNumber}}人</i>
+						</p>
+						<app-chartjs [questionData]="question"></app-chartjs>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="statistics" *ngIf="showTable">
+			<div class="btn" (click)="changeShowTable()">收起单题统计图表</div>
+		</div>
+	</div>
+	<div class="message" *ngIf="showSendMessage">
+		<div class="sendBtn">
+			<div class="sendName" (click)="sendMessage()"><i class="fa fa-wechat"></i>发布成绩通知消息<span *ngIf="sendMessageTime">{{timeLast}}s</span></div>
+		</div>
+	</div>
+	<div class="ranking">
+		<div class="rankTile">
+			<div class="rankName">本次作业排名详情</div>
+			<div class="rankType">
+				<div class="rankOne" (click)="changeShowType(1)" [ngClass]="{'selected':showType===1}">
+					<i class="fa fa-list-ol"></i>
+				</div>
+				<div class="rankTwo" (click)="changeShowType(2)" [ngClass]="{'selected':showType===2}">
+					<i class="fa fa-clock-o"></i>
+				</div>
+			</div>
+		</div>
+		<div class="list">
+			<ul *ngIf="count>0">
+				<li *ngFor="let student of studentList; let i=index;">
+					<div class="student" [ngClass]="{'noAnswer':!student.isAnswer}">
+						<div class="order">{{i+1}}.</div>
+						<div class="headimg"><img src="{{student.photo?student.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}"></div>
+						<div class="nameBox">
+							<p class="sign">{{student.studentName}}</p>
+							<p class="mark" *ngIf="student.isAnswer">
+								<span *ngIf="showType===1">{{student.score}}分</span>
+								<span *ngIf="showType===2">
+									{{student.durationTime | DurationTime}}
+								</span>
+							</p>
+							<p class="mark" *ngIf="!student.isAnswer">
+								<span>未作答</span>
+							</p>
+						</div>
+						<div class="correct" *ngIf="student.isAnswer">
+							<div (click)="correct(student.studentId,student.workId)">批改</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="tips">
+				<div class="loadMore" *ngIf="loadMore">
+					<div (click)="getMore()">查看更多</div>
+				</div>
+				<div class="noneMore" *ngIf="!loadMore&&count>size">我是有底线的</div>
+				<div class="none" *ngIf="count<0">还没有布置给任何人哦</div>
+			</div>
+		</div>
+	</div>
+</div>

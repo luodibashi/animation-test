@@ -1,0 +1,232 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">布置作业</div>
+	</div>
+</div>
+<div class="box">
+	<div class="child">
+		<form>
+			<span class="title">作业名</span>
+			<div class="wide">
+				<input class="input" type="text" name="workName" placeholder="请输入作业名字" [(ngModel)]="workName">
+			</div>
+		</form>
+	</div>
+	<div class="child">
+		<span class="titleOther">选择习题</span>
+		<div class="choose" (click)="choosePaper()">
+			<span *ngIf="targetPid" title="{{targetPaperName}}">{{targetShortPaperName}}</span>
+			<span *ngIf="!targetPid">请选择习题</span>
+		</div>
+	</div>
+	<p class="mineClass">我的班级</p>
+	<div class="classBox">
+		<ul class="father">
+			<li class="fatherLi">
+				<div class="name" *ngIf="classCount>0">
+					<div class="classInfo" *ngFor="let class of classList; let i= index;">
+						<div class="overall">
+							<i class="fa left" [ngClass]="{'fa-minus':showStudentClass.indexOf(class.cid)!=-1,'fa-plus':!(showStudentClass.indexOf(class.cid)!=-1)}" (click)="showStudentList(i)"></i>
+							<div class="info">{{class.className}}</div>
+							<i class="fa fa-check-circle right" [ngClass]="{'classSelected':class?.isMake===1}" (click)="chooseClass(i)"></i>
+						</div>
+						<div class="student" *ngIf="showStudentClass.indexOf(class.cid)!=-1">
+							<div class="list" *ngFor="let student of class['studentList']; let m=index;">
+								<div *ngIf="student.dataStatus===1">
+									<img src="{{student.photo?student.photo:'http://www.maixuexi.cn/images/me_logo_03.png'}}">
+									<div class="sName">
+										{{student.studentName}}
+										<span *ngIf="student.remarkName">({{student.remarkName}})</span>
+									</div>
+									<i class="fa fa-check-circle right" [ngClass]="{'studentSelected':student?.isMake===1}" (click)="chooseStudent(i,m)"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="more">
+		<p class="titleAll" (click)="showMoreChoose()">
+			<span>更多选项</span>
+			<i class="fa" [ngClass]="{'fa-sort-desc':!showMore,'fa-sort-up':showMore}"></i>
+		</p>
+		<div class="moreBox" *ngIf="showMore">
+			<div class="one">
+				<form>
+					<span class="title">作业通知时间</span>
+					<div class="wide">
+						<input class="input" type="datetime-local" name="noticeTime" [(ngModel)]="noticeTimeShow" (blur)="vaildNoticeTime()">
+					</div>
+				</form>
+			</div>
+			<p class="part">*需要早于作业开始时间</p>
+			<div class="one">
+				<form>
+					<span class="title">作业开始时间</span>
+					<div class="wide">
+						<input class="input" type="datetime-local" name="startTime" [(ngModel)]="startTimeShow" (blur)="vaildStartTime()">
+					</div>
+				</form>
+			</div>
+			<div class="one">
+				<form>
+					<span class="title">作业结束时间</span>
+					<div class="wide">
+						<input class="input" type="datetime-local" name="endTime" [(ngModel)]="endTimeShow" (blur)="vaildEndTime()">
+					</div>
+				</form>
+			</div>
+			<p class="part">*需要在作业开始和结束时间之内取</p>
+			<div class="one">
+				<form>
+					<span class="title">设置作业时长</span>
+					<div class="wide">
+						<input class="input" type="time" name="durationTime" [(ngModel)]="durationTimeShow" (blur)="vaildDurationTime()">
+					</div>
+				</form>
+			</div>
+			<p class="part">*默认不设置会以结束时间为准</p>
+			<div class="one">
+				<form>
+					<span class="title">设置为全班作业</span>
+					<div class="wide">
+						<div class="check">
+							<div class="yes" (click)="changeWholeWorkType(1)">
+								<div class="radio" [ngClass]="{'selected':isWholeWork===1}">
+									<div class="center"></div>
+								</div>
+								是
+							</div>
+							<div class="no" (click)="changeWholeWorkType(0)">
+								<div class="radio" [ngClass]="{'selected':isWholeWork===0}">
+									<div class="center"></div>
+								</div>
+								否
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<p class="part">*作业布置后，班级新加入者会收到作业</p>
+			<div class="one">
+				<form>
+					<span class="title">客观题选项打乱顺序</span>
+					<div class="wide">
+						<div class="check">
+							<div class="yes" (click)="changeIsMixedType(1)">
+								<div class="radio" [ngClass]="{'selected':isMixed===1}">
+									<div class="center"></div>
+								</div>
+								是
+							</div>
+							<div class="no" (click)="changeIsMixedType(0)">
+								<div class="radio" [ngClass]="{'selected':isMixed===0}">
+									<div class="center"></div>
+								</div>
+								否
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<p class="part">*如果选中每个学生客观题的选项将会乱序</p>
+			<div class="one">
+				<form>
+					<span class="title">作业提交后公布答案</span>
+					<div class="wide">
+						<div class="check">
+							<div class="yes" (click)="changeShowAnswerType(1)">
+								<div class="radio" [ngClass]="{'selected':showAnswerType===1}">
+									<div class="center"></div>
+								</div>
+								是
+							</div>
+							<div class="no" (click)="changeShowAnswerType(2)">
+								<div class="radio" [ngClass]="{'selected':showAnswerType===2}">
+									<div class="center"></div>
+								</div>
+								否
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<p class="part">*学生提交作业后答案直接公布</p>
+			<div class="one">
+				<form>
+					<span class="title">是否加入班级统计</span>
+					<div class="wide">
+						<div class="check">
+							<div class="yes" (click)="changeJoinStatisticsType(1)">
+								<div class="radio" [ngClass]="{'selected':isJoinStatistics===1}">
+									<div class="center"></div>
+								</div>
+								是
+							</div>
+							<div class="no" (click)="changeJoinStatisticsType(0)">
+								<div class="radio" [ngClass]="{'selected':isJoinStatistics===0}">
+									<div class="center"></div>
+								</div>
+								否
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<p class="part">*本次作业不会计入班级统计报告</p>
+		</div>
+	</div>
+	<div class="sureBox">
+		<div class="public" (click)="publishWork()">确认发布作业</div>
+	</div>
+</div>
+<div class="paper" *ngIf="showPaper">
+	<div class="list">
+		<div class="type">我的习题</div>
+	</div>
+	<div class="search">
+		<div class="input">
+			<form>
+				<input type="text" name="paper" placeholder="请输入习题名字" [(ngModel)]="searchPaperName">
+			</form>
+		</div>
+		<div class="btn">
+			<div (click)="searchPaper()">搜索</div>
+		</div>
+	</div>
+	<div class="paperInfo">
+		<ul *ngIf="paperCount>0">
+			<li *ngFor="let paper of paperList; let i = index;">
+				<div (click)="secletedPaper(i)">
+					<div class="up">
+						<i class="fa fa-check-circle" [ngClass]="{'selected':targetPid==paper.pid}"></i>
+						<div class="name" [ngClass]="{'disable':paper.isFinish==0}">{{paper.paperName}}</div>
+					</div>
+					<div class="down">
+						<p>创建时间:{{paper.createTime}}【{{['未敲定','已敲定'][paper.isFinish]}}】</p>
+					</div>
+				</div>
+			</li>
+			<li *ngIf="showMorePaper&&!searchPaperNow">
+				<p class="morePaper" (click)="getMorePaper()">获取更多习题</p>
+			</li>
+			<li *ngIf="searchPaperCount==0||!showMorePaper">
+				<p class="morePaper">没有习题哦</p>
+			</li>
+		</ul>
+	</div>
+	<div class="choosedPaper">
+		<div class="info">{{targetPaperName?targetPaperName:'您还未选择试卷'}}</div>
+	</div>
+	<div class="doBox">
+		<div class="yes" (click)="yesIamSure()">确定</div>
+		<div class="no" (click)="cancelChoose()">取消</div>
+	</div>
+</div>
+<div class="bg" *ngIf="showPaper"></div>

@@ -1,0 +1,211 @@
+.box{
+  position: fixed;
+  top: 8.4rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background: #f2f2f2;
+  .child{
+    padding: 1rem .5rem;
+    .search{
+      box-shadow: 0 1px 6px #ccc;
+      -moz-box-shadow: #ccc 0 1px 6px;
+      -webkit-box-shadow: #ccc 0 1px 6px;
+      border-radius: 4px;
+      background: #fff;
+      overflow: hidden;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      .input{
+        overflow: hidden;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed #ddd;
+        input{
+          border: none;
+          height: 40px;
+          line-height: 40px;
+          background: #f1f1f1;
+          width: 70%;
+          text-indent: 1rem;
+          font-size: 1.6rem;
+          border-radius: 4px;
+          float: left;
+        }
+        .btn{
+          float: right;
+          width: 30%;
+          div{
+            line-height: 40px;
+            text-align: center;
+            margin-left: 1rem;
+            // background: #4caf50;
+            border-radius: 4px;
+            font-size: 1.6rem;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+          }
+        }
+      }
+      .teacherInfo{
+        padding-top: 1rem;
+        overflow: hidden;
+        .info{
+          overflow: hidden;
+          .headImg{
+            float: left;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+            img{
+              width: 3rem;
+              height: 3rem;
+              border-radius: 50%;
+            }
+          }
+          .name{
+            float: left;
+            line-height: 3rem;
+            font-size: 1.6rem;
+          }
+          .launch{
+            float: right;
+            line-height: 3rem;
+            background: #4caf50;
+            color: #fff;
+            padding: 0 2rem;
+            font-size: 1.6rem;
+            border-radius: 4px;
+          }
+        }
+        .tips{
+          height: 3rem;
+          line-height:3rem;
+          font-size: 1.6rem;
+        }
+      }
+    }
+    .teacher{
+      box-shadow: 0 1px 6px #ccc;
+      -moz-box-shadow: #ccc 0 1px 6px;
+      -webkit-box-shadow: #ccc 0 1px 6px;
+      border-radius: 4px;
+      background: #fff;
+      overflow: hidden;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      .manageTitle{
+        font-size: 1.6rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed #ddd;
+        margin-bottom: 1rem;
+      }
+      ul{
+        li{
+          list-style: none;
+          list-style-type: none;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px dashed #ddd;
+          margin-top: 0.5rem;
+          .manager{
+            overflow: hidden;
+            .img{
+              float: left;
+              height: 4rem;
+              img{
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                margin-top: 0.5rem;
+              }
+            }
+            .userInfo{
+              float: left;
+              padding-left: 1rem;
+              padding: .2rem 0 .2rem .5rem;
+              height: 3.6rem;
+              .name{
+                font-size: 1.6rem;
+              }
+              .account{
+                font-size: 1.4rem;
+                color: #888;
+              }
+            }
+            .doSomeThing{
+              float: right;
+              .case{
+                overflow: hidden;
+                line-height: 4rem;
+                .master{
+                  line-height: 4rem;
+                  font-size: 1.6rem;
+                  color: #4caf50;
+                }
+                .attorn{
+                  float: left;
+                  margin-right: 1rem;
+                  font-size: 1.6rem;
+                  color: #4CAF50;
+                }
+                .waitJoin{
+                  float: left;
+                  margin-right: 1rem;
+                  font-size: 1.6rem;
+                  color: #989898;
+                }
+                .kickOut{
+                  float: right;
+                  font-size: 1.6rem;
+                  color: #FF9800;
+                }
+                .quit{
+                  line-height: 4rem;
+                  font-size: 1.6rem;
+                  color: #4caf50;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .workSet{
+      box-shadow: 0 1px 6px #ccc;
+      -moz-box-shadow: #ccc 0 1px 6px;
+      -webkit-box-shadow: #ccc 0 1px 6px;
+      border-radius: 4px;
+      background: #fff;
+      overflow: hidden;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      .setBox{
+        overflow: hidden;
+        .title{
+          float: left;
+          font-size: 1.6rem;
+          line-height: 3rem;
+        }
+        .checkBox{
+          float: right;
+          width: 2.6rem;
+          height: 2.6rem;
+          /* background: #ddd; */
+          border: 0.2rem solid #ddd;
+          border-radius: 4px;
+          i{
+            width: 2.6rem;
+            text-align: center;
+            line-height: 2.6rem;
+            font-size: 3rem;
+            color: #4caf50;
+          }
+        }
+        .selected{
+          border: 0.2rem solid #4caf50;
+        }
+      }
+    }
+  }
+}

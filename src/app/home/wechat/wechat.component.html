@@ -1,0 +1,38 @@
+<div class="navbar">
+	<div class="left" (click)="return()">
+		<i class="fa fa-chevron-left"></i>
+		<span>返回</span>
+	</div>
+	<div class="middle">
+		<div class="title">微信中心</div>
+	</div>
+</div>
+<div class="box">
+	<ul *ngIf="count">
+		<li *ngFor="let wx of wexinList; let i=index;">
+			<div class="child">
+				<div class="left">
+					<p class="name">
+						{{i+1}}
+						<span *ngIf="wx.openid">{{wx.wechatName}}</span>
+						<span *ngIf="!wx.openid">待绑定</span>
+					</p>
+					<div class="do">
+						<div *ngIf="!wx.openid" (click)="delete(i)">删除</div>
+						<div *ngIf="wx.openid" (click)="remove(i)">解除绑定</div>
+					</div>
+				</div>
+				<div class="right">
+					<img *ngIf="wx.openid" class="user" src="{{wx.wechatHead}}">
+          <div *ngIf="!wx.openid" class="qrcode" [innerHTML]="wx.qrcodeImg"></div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<div class="new" *ngIf="count<3">
+		<div (click)="addQrcode()">新增微信登录账号</div>
+	</div>
+	<div class="explain">
+		使用说明：新增二维码后，请使用要登录的微信扫描二维码或者长按识别即可绑定成功，之后可通过麦学习登录页第三方微信登录按钮直接进入系统，无需输入账号密码；每个账号限定绑定三个微信。
+	</div>
+</div>
